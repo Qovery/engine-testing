@@ -2,6 +2,9 @@
 import os
 import pymongo
 import flask
+import time
+
+time.sleep(30)
 
 client = pymongo.MongoReplicaSetClient(os.environ["QOVERY_DATABASE_MY_DDB_CONNECTION_URI"])
 print("Mongo info:")
