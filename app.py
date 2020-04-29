@@ -10,7 +10,7 @@ client = pymongo.MongoReplicaSetClient(os.environ["QOVERY_DATABASE_MY_DDB_CONNEC
 print("Mongo info:")
 print(client.server_info())
 
-app = flask.Flask()
+app = flask.Flask(__name__)
 
 @app.route("/")
 def index():
