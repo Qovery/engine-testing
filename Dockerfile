@@ -1,2 +1,3 @@
-FROM kennethreitz/httpbin
-EXPOSE 80
+FROM alpine
+ADD run.sh /
+CMD /run.sh
