@@ -1,2 +1,2 @@
-FROM kennethreitz/httpbin
-EXPOSE 80
+FROM hashicorp/http-echo 
+EXPOSE 5678
