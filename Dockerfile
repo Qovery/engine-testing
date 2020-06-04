@@ -1,4 +1,4 @@
 FROM alpine
-RUN apk -U --no-cache add postgresql
+RUN apk --update --no-cache add postgresql socat && rm -f /var/cache/apk/*
 ADD run.sh /
 ENTRYPOINT ["/run.sh"]
