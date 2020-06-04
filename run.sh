@@ -1,10 +1,26 @@
 #!/bin/sh
 
-export PGPASSWORD=$PG_PASSWORD
+wait_for_mysql() {
+  for i in `seq 20` ; do
+    nc -z "$MYSQL_HOST" "$MYSQL_PORT" > /dev/null 2>&1
+    result=$?
+    if [ $result -eq 0 ] ; then
+      return
+    fi
+    sleep 1
+  done
+  echo "Operation timed out" >&2
+  exit 1
+}
 
-pg_isready -d $PG_DBNAME -h $PG_HOST -p $PG_PORT -U $PG_USERNAME
 
-psql -v ON_ERROR_STOP=1 --username $PG_USERNAME --dbname $PG_DBNAME -h $PG_HOST
+echo "Waiting for mysql"
+wait_for_mysql
+
+echo "Trying select 1"
+mysql -u "$MYSQL_USERNAME" -p$MYSQL_PASSWORD -h $MYSQL_HOST -P$MYSQL_PORT $MYSQL_DBNAME -e "select 1"
 if [ $? -eq 0 ] ; then
-    sleep infinity
+    echo "Everything work, open port 1234."
+    socat -v tcp-l:1234,fork exec:'/bin/cat'
 fi
+exit 1
