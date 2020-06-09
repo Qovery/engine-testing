@@ -35,4 +35,4 @@ ensure_resquest_ok insert.json
 ensure_resquest_ok select.json
 
 echo "Everything work, open port 1234."
-mini_http -d / -p 1234
+mini_httpd -d / -p 1234
