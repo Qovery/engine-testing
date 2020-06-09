@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -z $ENABLE_DEBUG ] ; then
+    set -x
+fi
+
 wait_for_mongodb() {
   for i in `seq 20` ; do
     nc -z "$MONGODB_HOST" "$MONGODB_PORT" > /dev/null 2>&1
