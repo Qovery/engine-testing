@@ -34,5 +34,5 @@ wait_for_mongodb
 ensure_resquest_ok insert.json
 ensure_resquest_ok select.json
 
-echo "Everything work, open port 1234."
-mini_httpd -d / -p 1234
+echo "Everything work, open port 12345."
+mini_httpd -d / -p 12345
