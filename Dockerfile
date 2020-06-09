@@ -1,8 +1,6 @@
-FROM python:3-alpine
-RUN pip install flask pymongo
-COPY app.py /
-COPY rds-combined-ca-bundle.pem /
+FROM bitnami/mongodb:4.2.7-debian-10-r20
+USER root
+RUN apt-get update && apt-get -y install mini-httpd
+COPY rds-combined-ca-bundle.pem run.sh insert.json select.json /
 WORKDIR /
-ENV FLASK_APP /app.py
-ENTRYPOINT ["flask", "run", "-h", "0.0.0.0", "-p", "80"]
-EXPOSE 80
+CMD ["/run.sh"]
