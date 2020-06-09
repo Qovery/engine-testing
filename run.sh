@@ -36,3 +36,5 @@ ensure_resquest_ok select.json
 
 echo "Everything work, open port 12345."
 mini_httpd -d / -p 12345
+# hack because mini_httpd exit with message (but works): Address already in use
+sleep infinity
