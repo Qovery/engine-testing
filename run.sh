@@ -20,7 +20,12 @@ wait_for_mongodb() {
 ensure_resquest_ok() {
     todo="Try to insert"
     echo $todo
-    mongo $QOVERY_DATABASE_MY_DDB_CONNECTION_URI $1
+    if [ ! -z $CLOUD_PROVIDER ] && [ $CLOUD_PROVIDER == "aws" ] ; then
+        mongo --ssl --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
+    else
+        mongo $QOVERY_DATABASE_MY_DDB_CONNECTION_URI $1
+    fi
+
     if [ $? -ne 0 ] ; then
         echo "Error while trying to perform: $todo"
         exit 1
