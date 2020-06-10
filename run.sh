@@ -11,7 +11,7 @@ fi
 
 wait_for_mongodb() {
   for i in `seq 60` ; do
-    nc -z "$MONGODB_HOST" "$MONGODB_PORT" > /dev/null 2>&1
+    nc -z "$QOVERY_DATABASE_TESTING_DATABASE_FQDN" "$QOVERY_DATABASE_TESTING_DATABASE_PORT" > /dev/null 2>&1
     if [ $? -eq 0 ] ; then
       return
     fi
