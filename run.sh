@@ -4,6 +4,11 @@ if [ ! -z $ENABLE_DEBUG ] ; then
     set -x
 fi
 
+if [ ! -z $DEBUG_PAUSE ] ; then
+    sleep infinity
+fi
+
+
 wait_for_mongodb() {
   for i in `seq 60` ; do
     nc -z "$MONGODB_HOST" "$MONGODB_PORT" > /dev/null 2>&1
