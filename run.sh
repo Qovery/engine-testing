@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ ! -z $ENABLE_DEBUG ] ; then
+    set -x
+fi
+
 wait_for_mysql() {
   for i in `seq 20` ; do
     nc -z "$MYSQL_HOST" "$MYSQL_PORT" > /dev/null 2>&1
