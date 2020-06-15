@@ -1,12 +1,29 @@
 #!/bin/sh
 
-export PGPASSWORD=$PG_PASSWORD
+if [ ! -z $ENABLE_DEBUG ] ; then
+    set -x
+fi
 
-echo "Waiting for postgres"
-pg_isready -d $PG_DBNAME -h $PG_HOST -p $PG_PORT -U $PG_USERNAME
+wait_for_redis() {
+  for i in `seq 20` ; do
+    nc -z "$REDIS_HOST" "$REDIS_PORT" > /dev/null 2>&1
+    result=$?
+    if [ $result -eq 0 ] ; then
+      return
+    fi
+    sleep 1
+  done
+  echo "Operation timed out" >&2
+  exit 1
+}
 
-echo "Trying select 1"
-psql -v ON_ERROR_STOP=1 --username $PG_USERNAME --dbname $PG_DBNAME -h $PG_HOST -c "select 1"
+
+echo "Waiting for redis"
+wait_for_redis
+
+
+echo "Trying connect to redis"
+redis-cli -u "redis://redis:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" "info"
 if [ $? -eq 0 ] ; then
     echo "Everything work, open port 1234."
     mini_httpd -D -d / -p 1234
