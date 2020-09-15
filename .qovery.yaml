@@ -1,5 +1,0 @@
-application:
-  name: http-echo
-  project: q-test
-  region: "aws/eu-west-3"
-  publicly_accessible: true
