@@ -26,7 +26,13 @@ ensure_resquest_ok() {
     todo="Try to insert"
     echo $todo
     if [ ! -z $IS_DOCUMENTDB ] && [ $IS_DOCUMENTDB == "true" ] ; then
-        mongo --ssl --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
+        # If the dns is an aws fqdn
+        if [ $(echo $QOVERY_DATABASE_TESTING_DATABASE_FQDN | grep -c "amazonaws.com$") == 1 ] ; then
+            mongo --ssl --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
+        # If the dns is a CNAME redirecting to aws fqdn
+        else
+            mongo --ssl --sslAllowInvalidHostnames --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1  
+        fi
     else
         mongo $QOVERY_DATABASE_MY_DDB_CONNECTION_URI $1
     fi
