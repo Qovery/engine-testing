@@ -23,7 +23,7 @@ wait_for_redis() {
 
 ensure_resquest_ok() {
   echo "Trying connect to redis"
-  redis-cli -u "redis://redis:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" "info"
+  redis-cli -u "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" "info"
   if [ $? -ne 0 ] ; then
     echo "Error while trying to get redis info"
     exit 1
