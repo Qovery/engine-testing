@@ -1,6 +1,6 @@
 FROM bitnami/redis:6.0.9
 USER root
-RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
+RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim iputils-ping
 USER 1001
 COPY run.sh /
 CMD ["/run.sh"]
