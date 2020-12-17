@@ -1,0 +1,7 @@
+FROM bitnami/postgres:10.15.0-debian-10-r32
+USER root
+RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
+USER 1001
+WORKDIR /
+ADD run.sh /
+CMD ["/run.sh"]

@@ -1,5 +1,13 @@
 #!/bin/sh
 
+if [ ! -z $ENABLE_DEBUG ] ; then
+    set -x
+fi
+
+if [ ! -z $DEBUG_PAUSE ] ; then
+    sleep infinity
+fi
+
 export PGPASSWORD=$PG_PASSWORD
 
 echo "Waiting for postgres"
