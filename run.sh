@@ -30,7 +30,7 @@ echo "Waiting for mysql"
 wait_for_mysql
 
 echo "Trying select 1"
-mysql -u "$MYSQL_USERNAME" -p$MYSQL_PASSWORD -h $MYSQL_HOST -P$MYSQL_PORT $MYSQL_DBNAME -e "select 1"
+mysql -u "$MYSQL_USERNAME" -p$MYSQL_PASSWORD -h $MYSQL_HOST -P$MYSQL_PORT -e "select 1"
 if [ $? -eq 0 ] ; then
     echo "Everything work, open port 1234."
     mini_httpd -D -d / -p 1234
