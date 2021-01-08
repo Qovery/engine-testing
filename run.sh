@@ -11,12 +11,15 @@ fi
 wait_for_mysql() {
   for i in `seq 20` ; do
     echo "testing connection"
-    nc $MYSQL_HOST $MYSQL_PORT > /dev/null 2>&1
-    result=$?
-    if [ $result -eq 0 ] ; then
+    nc -z -v -w5 $MYSQL_HOST $MYSQL_PORT
+    result1=$?
+    if [  "$result1" != 0 ]; then
+      echo  'port $MYSQL_PORT is closed'
+      sleep 1
+    else
+      echo 'port $MYSQL_PORT is open'
       return
     fi
-    sleep 1
   done
   echo "Operation Timeout"
   exit 1
