@@ -1,6 +1,6 @@
 FROM quay.io/bitnami/mysql:8.0.22-debian-10-r46
 USER root
-RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
+RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim telnet
 USER 1001
 WORKDIR /
 ADD run.sh /
