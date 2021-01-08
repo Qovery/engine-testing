@@ -11,7 +11,7 @@ fi
 wait_for_mysql() {
   for i in `seq 20` ; do
     echo "testing connection"
-    telnet $MYSQL_HOST $MYSQL_PORT > /dev/null 2>&1
+    nc $MYSQL_HOST $MYSQL_PORT > /dev/null 2>&1
     result=$?
     if [ $result -eq 0 ] ; then
       return
