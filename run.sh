@@ -10,14 +10,15 @@ fi
 
 wait_for_mysql() {
   for i in `seq 20` ; do
-    nc -z "$MYSQL_HOST" "$MYSQL_PORT" > /dev/null 2>&1
+    echo "testing connection"
+    telnet $MYSQL_HOST $MYSQL_PORT > /dev/null 2>&1
     result=$?
     if [ $result -eq 0 ] ; then
       return
     fi
     sleep 1
   done
-  echo "Operation timed out" >&2
+  echo "Operation Timeout"
   exit 1
 }
 
