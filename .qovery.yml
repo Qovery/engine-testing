@@ -1,11 +1,10 @@
 application:
-  name: httpbin
+  name: simple-node-app
   project: ${RANDOM_STR_PLACEHOLDER}
-  cloud_region: "aws/eu-west-3"
   publicly_accessible: true
 routers:
   - name: main
     routes:
-      - application_name: httpbin
+      - application_name: simple-node-app
         paths:
           - /*
