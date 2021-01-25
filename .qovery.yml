@@ -1,6 +1,6 @@
 application:
   name: simple-node-app
-  project: ${RANDOM_STR_PLACEHOLDER}
+  project: engine-test
   publicly_accessible: true
 routers:
   - name: main
