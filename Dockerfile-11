@@ -1,4 +1,4 @@
-FROM quay.io/bitnami/postgresql:11.10.0-debian-10-r32
+FROM bitnami/postgresql:11.10.0-debian-10-r32
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
