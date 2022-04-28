@@ -1,4 +1,4 @@
-FROM quay.io/bitnami/mongodb:4.4.1-debian-10-r39
+FROM bitnami/mongodb:4.4.1-debian-10-r39
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
