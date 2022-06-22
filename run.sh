@@ -22,7 +22,7 @@ wait_for_redis() {
 }
 
 ensure_resquest_ok() {
-  if [ ${REDIS_HOST} == master.* || ${REDIS_HOST} == configuration.* ] ; then
+  if [ ${REDIS_USERNAME} == default ] ; then
      echo "Trying connect to redis with TLS enabled"
     redis-cli -u "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" --tls "info"
   else
