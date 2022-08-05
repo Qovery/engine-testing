@@ -1,4 +1,4 @@
-FROM bitnami/redis:6.0.9
+FROM bitnami/redis:6.2.7-debian-11-r23
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim iputils-ping
 USER 1001
