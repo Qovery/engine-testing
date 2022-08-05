@@ -1,4 +1,4 @@
-FROM bitnami/postgresql:13.4.0-debian-10-r58
+FROM bitnami/postgresql:13.7.0-debian-11-r31
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
