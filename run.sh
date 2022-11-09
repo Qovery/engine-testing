@@ -24,8 +24,7 @@ wait_for_redis() {
 ensure_resquest_ok() {
   if $IS_ELASTICCACHE ; then
     echo "Trying connect to redis with TLS enabled"
-    #redis-cli -u "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" --tls "info"
-    redis-cli --tls -a "${REDIS_PASSWORD}" -h ${REDIS_HOST} -p ${REDIS_PORT} info
+    redis-cli -u "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" --tls "info"
   else
     echo "Trying connect to redis"
     redis-cli -u "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" "info"
