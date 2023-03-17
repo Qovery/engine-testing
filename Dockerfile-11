@@ -1,4 +1,4 @@
-FROM bitnami/postgresql:11.16.0-debian-11-r31
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-postgresql:11.18.0
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
