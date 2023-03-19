@@ -1,4 +1,4 @@
-FROM bitnami/redis:5.0.14-debian-10-r173
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-redis:5.0.14
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim iputils-ping
 USER 1001
