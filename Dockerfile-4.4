@@ -1,4 +1,4 @@
-FROM bitnami/mongodb:4.4.15-debian-10-r8
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-mongodb:4.4.15
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
