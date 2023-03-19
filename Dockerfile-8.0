@@ -1,4 +1,4 @@
-FROM bitnami/mysql:8.0.30-debian-11-r4
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-mysql:8.0.32
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim telnet
 USER 1001
