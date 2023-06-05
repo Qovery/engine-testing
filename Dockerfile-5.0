@@ -1,4 +1,4 @@
-FROM public.ecr.aws/r3m4q3r9/pub-mirror-mongodb:5.2.18
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-mongodb:5.0.18
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
