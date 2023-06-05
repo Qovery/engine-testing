@@ -28,13 +28,13 @@ ensure_resquest_ok() {
     if [ ! -z $IS_DOCUMENTDB ] && [ $IS_DOCUMENTDB == "true" ] ; then
         # If the dns is an aws fqdn
         if [ $(echo $QOVERY_DATABASE_TESTING_DATABASE_FQDN | grep -c "amazonaws.com$") == 1 ] ; then
-            mongosh --tls --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --tlsCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
+            mongo --ssl --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
         # If the dns is a CNAME redirecting to aws fqdn
         else
-            mongosh --tls --tlsAllowInvalidHostnames --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT -tlsCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1
+            mongo --ssl --sslAllowInvalidHostnames --host $QOVERY_DATABASE_TESTING_DATABASE_FQDN:$QOVERY_DATABASE_TESTING_DATABASE_PORT --sslCAFile rds-combined-ca-bundle.pem --username $QOVERY_DATABASE_TESTING_DATABASE_USERNAME --password $QOVERY_DATABASE_TESTING_DATABASE_PASSWORD $1  
         fi
     else
-        mongosh $QOVERY_DATABASE_MY_DDB_CONNECTION_URI $1
+        mongo $QOVERY_DATABASE_MY_DDB_CONNECTION_URI $1
     fi
 
     if [ $? -ne 0 ] ; then

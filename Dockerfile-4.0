@@ -2,6 +2,6 @@ FROM public.ecr.aws/r3m4q3r9/pub-mirror-mongodb:4.0.27
 USER root
 RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
 USER 1001
-COPY rds-combined-ca-bundle.pem run.sh insert.json select.json /
+COPY rds-combined-ca-bundle.pem run_old.sh insert.json select.json /
 WORKDIR /
-CMD ["/run.sh"]
+CMD ["/run_old.sh"]
