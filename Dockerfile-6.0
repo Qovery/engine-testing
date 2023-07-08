@@ -1,0 +1,6 @@
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-redis:6.0
+USER root
+RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim iputils-ping
+USER 1001
+COPY run.sh /
+CMD ["/run.sh"]
