@@ -1,0 +1,7 @@
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-postgresql:16
+USER root
+RUN apt-get update && apt-get -y install mini-httpd netcat-openbsd vim
+USER 1001
+WORKDIR /
+ADD run.sh /
+CMD ["/run.sh"]
