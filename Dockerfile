@@ -1,4 +1,4 @@
-FROM node:13-alpine
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-node:13-alpine
 
 RUN mkdir -p /usr/src/app
 
