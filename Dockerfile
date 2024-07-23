@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-alpine-node:8
 	
 RUN mkdir -p /app && mkdir -p /app/public
 
