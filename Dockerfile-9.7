@@ -1,0 +1,11 @@
+FROM public.ecr.aws/r3m4q3r9/pub-mirror-mysql:9.7-oracle
+USER root
+# Oracle Linux base (microdnf, not apt). The mysql client ships in the image; add python3 to serve
+# the :1234 health endpoint since mini-httpd isn't packaged for Oracle Linux.
+RUN microdnf install -y python3 && microdnf clean all
+USER 999
+WORKDIR /
+COPY run.sh /
+# Drop the mysql server entrypoint so CMD runs run.sh directly instead of trying to boot mysqld.
+ENTRYPOINT []
+CMD ["/run.sh"]
