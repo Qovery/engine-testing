@@ -25,13 +25,14 @@ wait_for_mysql() {
   exit 1
 }
 
-# Serve a health endpoint on :1234. mini_httpd on the Debian-based images; python3 on the
+# Serve a health endpoint on :1234. mini_httpd on the Debian-based images; a static busybox on the
 # Oracle-Linux-based official image (9.7+), which has no mini-httpd package.
 start_http_server() {
   if command -v mini_httpd >/dev/null 2>&1 ; then
     mini_httpd -D -d / -p 1234
-  elif command -v python3 >/dev/null 2>&1 ; then
-    python3 -m http.server 1234
+  elif command -v busybox >/dev/null 2>&1 ; then
+    mkdir -p /tmp/www && echo ok > /tmp/www/index.html
+    busybox httpd -f -p 1234 -h /tmp/www
   else
     echo "No HTTP server available" >&2
     exit 1
